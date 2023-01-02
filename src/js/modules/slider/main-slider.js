@@ -35,27 +35,50 @@ export default class MainSlider extends Slider {
     this.slides[this.slideIndex - 1].style.display = 'block';
 }
 
-plusSlides(n) {
-    this.showSlides(this.slideIndex += n);
-  }
+    plusSlides(n) {
+        this.showSlides(this.slideIndex += n);
+    }   
+
+
+    bindTriggers() {
+        this.btns.forEach(item => {
+            item.addEventListener('click', () => {
+                this.plusSlides(1);
+            });
+    
+            item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.slideIndex = 1;
+                this.showSlides(this.slideIndex);
+            });
+        });
+
+        document.querySelectorAll(".prevmodule").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.plusSlides(-1);
+            });
+        });
+    
+        document.querySelectorAll(".nextmodule").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation(); // otmenit vsplitiye sobitiya 
+                this.plusSlides(1);
+            });
+        });
+    }
+
+
 
   render() {
+   if(this.container) {
     try {
         this.hanson = document.querySelector('.hanson');
     } catch(e){}
-
-    this.btns.forEach(item => {
-        item.addEventListener('click', () => {
-            this.plusSlides(1);
-        });
-
-        item.parentNode.previousElementSibling.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.slideIndex = 1;
-            this.showSlides(this.slideIndex);
-        });
-    });
-
     this.showSlides(this.slideIndex);
+    this.bindTriggers();
+   }
   }
 }

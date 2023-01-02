@@ -32,7 +32,6 @@ export default class Form {
   initMask() {
     let setCursorPosition = (pos, elem) => {
       elem.focus();
-      
       if (elem.setSelectionRange) {
           elem.setSelectionRange(pos, pos);
       } else if (elem.createTextRange) {

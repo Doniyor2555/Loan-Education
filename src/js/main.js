@@ -8,6 +8,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const slider = new MainSlider({btns: '.next', container: '.page'});
   slider.render();
 
+  const modulePageSlier = new MainSlider({
+    container: ".moduleapp",
+    btns: ".next"
+  });
+  modulePageSlier.render();
+
   const player = new VideoPlayer(".showup .play", ".overlay");
   player.init();
 
